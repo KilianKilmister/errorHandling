@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "esnext",
+    ],
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "assumeChangesOnlyAffectDirectDependencies": true,
+    "declarationDir": "@types",
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "plugins": [],
+    "pretty": true,
+    "rootDir": "src",
+    "sourceMap": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "stripInternal": true
+  },
+  "ts-node": {
+    "compilerOptions": {},
+  },
+  "include": [
+    "src"
+  ]
+}

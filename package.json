@@ -1,0 +1,32 @@
+{
+  "name": "@slick_kilmister/error-handling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "keywords": [],
+  "author": "kilian <kilian@catsoft.ch>",
+  "dependencies": {
+    "kleur": "^3.0.3"
+  },
+  "files": [
+    "dist/",
+    "@types/"
+  ],
+  "scripts": {
+    "test": "echo \"TODO: add some default scripts\"",
+    "build": "tsc -p ."
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@k-foss/ts-esnode": "*",
+    "@types/node": "*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "@typescript-eslint/parser": "*",
+    "babel-eslint": "*",
+    "eslint": "*",
+    "standardx": "*",
+    "ts-node": "*",
+    "typescript": "next"
+  }
+}
