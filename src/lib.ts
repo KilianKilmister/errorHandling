@@ -1,25 +1,32 @@
 import { FancyError } from './fancyError.js'
-import { AssertPredicate, AssertionError } from 'assert'
-import type { Options } from './fancyError.js'
+import type { ColorOptions } from './fancyError.js'
 
-export class ParamError extends FancyError {
-  constructor (message: string, enclosingFunction?: Function, options?: Options)
-  constructor (message: string, options?: Options, enclosingFunction?: Function)
-  constructor (message = '', param1?: Function | Options, param2?: Function | Options) {
-    let wrapper; let options
-    switch (true) {
-      case typeof param1 === 'function':
-        wrapper = param1
-        if (typeof param2 === 'object') options = param2
-        break
-      case typeof param2 === 'function':
-        wrapper = param2
-        if (typeof param1 !== 'object') throw new ParamError('Expected')
-        break
+
+export interface ArgumentErrorOptions {
+  name?: string
+  allowedMessage?: string
+  received?: any
+  colors?: ColorOptions | false | null
+}
+
+export class ArgumentError extends FancyError {
+  constructor (allowedMessage: string, received?: any, enclosingFunction?)
+  constructor (allowedMessage: string, enclosingFunction?)
+  constructor (options: ArgumentErrorOptions, enclosingFunction?)
+  constructor (...params) {
+    // normalizing input
+    const options: ArgumentErrorOptions = {
+      name: 'ArgumentError',
+      allowedMessage: '',
     }
-    super({
-      name: 'PramError',
-      message: `Invalid Options: ${message.replace(/^\w/, message[0].toUpperCase()).replace(/[^.]$/, message.charAt(-1) + '.')}`
-    }, wrapper)
+    let enclosingFunction = ArgumentError
+    if (typeof params[0] === 'string') options.allowedMessage = params[0]
+    if (typeof params[0] === 'object') Object.assign(options, params[0])
+    if (typeof params[1] !== 'function') options.received = params[2]
+    else enclosingFunction = params[1]
+    if (typeof params[2] !== 'function') enclosingFunction = params[2]
+    // formatting
+    const message = options.allowedMessage + `\n${' '.repeat(8)}recieved: ${options.received}`
+    super({name: options.name, message, colors: options.colors }, enclosingFunction)
   }
 }

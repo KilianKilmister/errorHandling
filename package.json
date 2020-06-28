@@ -7,7 +7,7 @@
   "keywords": [],
   "author": "kilian <kilian@catsoft.ch>",
   "dependencies": {
-    "kleur": "^3.0.3"
+    "kleur": "^4.0.2"
   },
   "types": "@types/main.d.ts",
   "files": [
@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "test": "echo \"TODO: add some default scripts\"",
-    "build": "tsc -p ."
+    "build": "tsc -p . | echo"
   },
   "license": "MIT",
   "devDependencies": {

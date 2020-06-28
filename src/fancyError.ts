@@ -10,40 +10,36 @@ export interface ColorOptions {
   file?: Color
 }
 
-export interface Options {
+export interface ErrorOptions {
   name?: string
   message?: string
-  colors?: ColorOptions | false
+  colors?: ColorOptions | false | null
 }
 
 export class FancyError extends Error {
   colors: ColorOptions = { name: 'red', message: 'yellow', file: 'cyan' }
   name = 'Error'
 
-  constructor (options: Options, enclosingFunction?: Function)
+  constructor (options: ErrorOptions, enclosingFunction?: Function)
   constructor (message: string, enclosingFunction?: Function)
-  constructor (options: Options | string, enclosingFunction?) {
+  constructor (options: ErrorOptions | string, enclosingFunction?) {
     super()
     if (typeof options === 'object'){
-      if (options.colors === false) {
+      if (options.colors === false || options.colors === null) {
         this.colors.name = this.colors.message = this.colors.file = 'reset'
       } else Object.assign(this.colors, options.colors)
     }
     this.message = typeof options === 'string' ? options : options.message
-    this.name = (options as Options).name || this.name
+    this.name = (options as ErrorOptions).name || this.name
     Error.captureStackTrace(this, enclosingFunction || FancyError)
     return this
   }
 
   [util.inspect.custom] () {
-    const name = kleur[this.colors.name](this.name)
-    const message = kleur[this.colors.message](this.message)
-    const stack = kleur.dim(this.stack.substr(this.stack.indexOf('\n') + 1)
-      .replace(/file:\/{3}\S+/g, kleur[this.colors.file]))
-
-    return [
-      `${name}: ${message}`,
-      stack
-    ].join('\n')
+    this.name = kleur[this.colors.name](this.name)
+    this.message = kleur[this.colors.message](this.message)
+    const lineNum = Array.from(this.name + this.message).filter(char => char === '\n').length + 1
+    this.stack = kleur.dim(this.stack.replace(new RegExp(`(.*\n?){${lineNum}}`), '').replace(/file:\/{3}\S+/g, kleur[this.colors.file]))
+    return this
   }
 }
