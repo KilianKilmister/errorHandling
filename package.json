@@ -11,7 +11,7 @@
   },
   "types": "@types/main.d.ts",
   "files": [
-    "dist/",
+    "dist/**/*.js",
     "@types/"
   ],
   "scripts": {
