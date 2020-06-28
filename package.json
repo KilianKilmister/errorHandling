@@ -1,14 +1,15 @@
 {
   "name": "@slick_kilmister/error-handling",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "",
-  "main": "main.js",
+  "main": "dist/main.js",
   "type": "module",
   "keywords": [],
   "author": "kilian <kilian@catsoft.ch>",
   "dependencies": {
     "kleur": "^3.0.3"
   },
+  "types": "@types/main.d.ts",
   "files": [
     "dist/",
     "@types/"
@@ -28,5 +29,13 @@
     "standardx": "*",
     "ts-node": "*",
     "typescript": "next"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KilianKilmister/errorHandling.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KilianKilmister/errorHandling/issues"
+  },
+  "homepage": "https://github.com/KilianKilmister/errorHandling#readme"
 }
